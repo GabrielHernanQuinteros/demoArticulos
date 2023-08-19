@@ -1,4 +1,4 @@
-package main
+package vars
 
 import (
 	"fmt"
@@ -6,6 +6,13 @@ import (
 
 	"github.com/joho/godotenv"
 )
+
+type EstrucReg struct {
+	Id    int64  `json:"id"`
+	Name  string `json:"name"`
+	Genre string `json:"genre"`
+	Year  int64  `json:"year"`
+}
 
 var _ = godotenv.Load(".env") // Cargar del archivo llamado ".env"
 var (
@@ -18,3 +25,5 @@ var (
 )
 
 const AllowedCORSDomain = "http://localhost"
+
+const Port = ":8000"

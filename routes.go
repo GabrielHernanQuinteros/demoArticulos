@@ -4,18 +4,16 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/GabrielHernanQuinteros/demoArticulos/other"
-	"github.com/gorilla/mux"
-
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
+	"github.com/gorilla/mux"
 )
 
 //===================================================================================================
 // Funciones de ROUTERS
 
-func TraerVideogames(parWriter http.ResponseWriter, parRequest *http.Request) {
+func TraerRegistros(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	auxRegistros, err := TraerVideogamesSQL()
+	auxRegistros, err := TraerRegistrosSQL()
 
 	if err == nil {
 		mytools.RespondWithSuccess(auxRegistros, parWriter)
@@ -25,17 +23,17 @@ func TraerVideogames(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 }
 
-func TraerVideogamePorId(parWriter http.ResponseWriter, parRequest *http.Request) {
+func TraerRegistroPorId(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	auxIdString := mux.Vars(parRequest)["id"]
-	auxId, err := other.StringToInt64(auxIdString)
+	auxId, err := mytools.StringToInt64(auxIdString)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 		return
 	}
 
-	auxRegistro, err := TraerVideogamePorIdSQL(auxId)
+	auxRegistro, err := TraerRegistroPorIdSQL(auxId)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
@@ -45,15 +43,15 @@ func TraerVideogamePorId(parWriter http.ResponseWriter, parRequest *http.Request
 
 }
 
-func CrearVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func CrearRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	var auxRegistro VideoGame
+	var auxRegistro EstrucReg
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 	} else {
-		err := CrearVideogameSQL(auxRegistro)
+		err := CrearRegistroSQL(auxRegistro)
 
 		if err != nil {
 			mytools.RespondWithError(err, parWriter)
@@ -65,15 +63,15 @@ func CrearVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 }
 
-func ModificarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func ModificarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	var auxRegistro VideoGame
+	var auxRegistro EstrucReg
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 	} else {
-		err := ModificarVideogameSQL(auxRegistro)
+		err := ModificarRegistroSQL(auxRegistro)
 
 		if err != nil {
 			mytools.RespondWithError(err, parWriter)
@@ -85,17 +83,17 @@ func ModificarVideogame(parWriter http.ResponseWriter, parRequest *http.Request)
 
 }
 
-func BorrarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func BorrarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	auxIdString := mux.Vars(parRequest)["id"]
-	auxId, err := other.StringToInt64(auxIdString)
+	auxId, err := mytools.StringToInt64(auxIdString)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 		return
 	}
 
-	err = BorrarVideogameSQL(auxId)
+	err = BorrarRegistroSQL(auxId)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)

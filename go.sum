@@ -1,5 +1,7 @@
-github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819142807-8fdd43728828 h1:esZGxwVEPCr4EvOlrNfxWr5eLYcbQrGO9S0QFnkj7eU=
-github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819142807-8fdd43728828/go.mod h1:nuP5/0vYKy4ZjhxcJIf2KOxMxPOt2jF3nqjYxoUQhuM=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819181102-46da0970a6a5 h1:68oUK6GZz52td5+xhFr74nb7XWpAlJVJU8uyTUUefEE=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819181102-46da0970a6a5/go.mod h1:MY1ffD3fcAO9PS0aguRG6BMwgxT7fS091yKMZuJvb7w=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819182108-b3344a9b2b62 h1:pE01bY0FdD2RvfQlvdHW7pbrIsdUOViQUzPzKzlaVoc=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819182108-b3344a9b2b62/go.mod h1:VZTvA96ZESI5zVpkU0H677+MqdQdNeX82/BgwG1DR2A=
 github.com/go-sql-driver/mysql v1.7.1 h1:lUIinVbN1DY0xBg0eMOzmmtGoHwWBbvnWubQUrtU8EI=
 github.com/go-sql-driver/mysql v1.7.1/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=

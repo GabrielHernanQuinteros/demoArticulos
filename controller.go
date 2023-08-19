@@ -4,7 +4,7 @@ import (
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 )
 
-func CrearVideogameSQL(videoGame VideoGame) error {
+func CrearRegistroSQL(registro EstrucReg) error {
 
 	bd, err := mytools.ConectarDB(ConnectionString)
 
@@ -12,13 +12,13 @@ func CrearVideogameSQL(videoGame VideoGame) error {
 		return err
 	}
 
-	_, err = bd.Exec("INSERT INTO video_games (name, genre, year) VALUES (?, ?, ?)", videoGame.Name, videoGame.Genre, videoGame.Year)
+	_, err = bd.Exec("INSERT INTO video_games (name, genre, year) VALUES (?, ?, ?)", registro.Name, registro.Genre, registro.Year) //Modificar
 
 	return err
 
 }
 
-func BorrarVideogameSQL(id int64) error {
+func BorrarRegistroSQL(id int64) error {
 
 	bd, err := mytools.ConectarDB(ConnectionString)
 
@@ -26,13 +26,12 @@ func BorrarVideogameSQL(id int64) error {
 		return err
 	}
 
-	_, err = bd.Exec("DELETE FROM video_games WHERE id = ?", id)
+	_, err = bd.Exec("DELETE FROM video_games WHERE id = ?", id) //Modificar
 
 	return err
 }
 
-// It takes the ID to make the update
-func ModificarVideogameSQL(videoGame VideoGame) error {
+func ModificarRegistroSQL(registro EstrucReg) error {
 
 	bd, err := mytools.ConectarDB(ConnectionString)
 
@@ -40,64 +39,67 @@ func ModificarVideogameSQL(videoGame VideoGame) error {
 		return err
 	}
 
-	_, err = bd.Exec("UPDATE video_games SET name = ?, genre = ?, year = ? WHERE id = ?", videoGame.Name, videoGame.Genre, videoGame.Year, videoGame.Id)
+	_, err = bd.Exec("UPDATE video_games SET name = ?, genre = ?, year = ? WHERE id = ?", registro.Name, registro.Genre, registro.Year, registro.Id) //Modificar
 
 	return err
 }
-func TraerVideogamesSQL() ([]VideoGame, error) {
+
+func TraerRegistrosSQL() ([]EstrucReg, error) {
 
 	//Declare an array because if there's error, we return it empty
-	videoGames := []VideoGame{}
+	arrRegistros := []EstrucReg{}
 
 	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
-		return videoGames, err
+		return arrRegistros, err
 	}
 
 	// Get rows so we can iterate them
-	rows, err := bd.Query("SELECT id, name, genre, year FROM video_games")
+	rows, err := bd.Query("SELECT id, name, genre, year FROM video_games") //Modificar
 
 	if err != nil {
-		return videoGames, err
+		return arrRegistros, err
 	}
 
 	// Iterate rows...
 	for rows.Next() {
 		// In each step, scan one row
-		var videoGame VideoGame
-		err = rows.Scan(&videoGame.Id, &videoGame.Name, &videoGame.Genre, &videoGame.Year)
+		var registro EstrucReg
+
+		err = rows.Scan(&registro.Id, &registro.Name, &registro.Genre, &registro.Year) //Modificar
 
 		if err != nil {
-			return videoGames, err
+			return arrRegistros, err
 		}
 
 		// and append it to the array
-		videoGames = append(videoGames, videoGame)
+		arrRegistros = append(arrRegistros, registro)
 	}
 
-	return videoGames, nil
+	return arrRegistros, nil
 
 }
 
-func TraerVideogamePorIdSQL(id int64) (VideoGame, error) {
+func TraerRegistroPorIdSQL(id int64) (EstrucReg, error) {
 
-	var videoGame VideoGame
+	var registro EstrucReg
 
 	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
-		return videoGame, err
+		return registro, err
 	}
 
-	row := bd.QueryRow("SELECT id, name, genre, year FROM video_games WHERE id = ?", id)
-	err = row.Scan(&videoGame.Id, &videoGame.Name, &videoGame.Genre, &videoGame.Year)
+	row := bd.QueryRow("SELECT id, name, genre, year FROM video_games WHERE id = ?", id) //Modificar
+
+	err = row.Scan(&registro.Id, &registro.Name, &registro.Genre, &registro.Year) //Modificar
 
 	if err != nil {
-		return videoGame, err
+		return registro, err
 	}
 
 	// Success!
-	return videoGame, nil
+	return registro, nil
 
 }

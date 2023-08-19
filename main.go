@@ -9,20 +9,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type VideoGame struct {
-	Id    int64  `json:"id"`
-	Name  string `json:"name"`
-	Genre string `json:"genre"`
-	Year  int64  `json:"year"`
-}
-
 func main() {
 
 	mytools.Hola()
 
-	// Ping database
-	//auxBaseDatos, err := ConectarDB()
-	auxBaseDatos, err := mytools.ConectarDB(ConnectionString)
+	auxBaseDatos, err := mytools.ConectarDB(ConnectionString) // Ping database
 
 	if err != nil {
 
@@ -44,29 +35,25 @@ func main() {
 
 	auxRouter := mux.NewRouter()
 
-	//setupRoutesForVideoGames(router)
-
 	mytools.EnableCORS(auxRouter)
 
-	auxRouter.HandleFunc("/videogames", TraerVideogames).Methods(http.MethodGet)
-	auxRouter.HandleFunc("/videogames/{id}", TraerVideogamePorId).Methods(http.MethodGet)
-	auxRouter.HandleFunc("/videogames", CrearVideogame).Methods(http.MethodPost)
-	auxRouter.HandleFunc("/videogames", ModificarVideogame).Methods(http.MethodPut)
-	auxRouter.HandleFunc("/videogames/{id}", BorrarVideogame).Methods(http.MethodDelete)
+	auxRouter.HandleFunc("/videogames", TraerRegistros).Methods(http.MethodGet)          //Modificar
+	auxRouter.HandleFunc("/videogames/{id}", TraerRegistroPorId).Methods(http.MethodGet) //Modificar
+	auxRouter.HandleFunc("/videogames", CrearRegistro).Methods(http.MethodPost)          //Modificar
+	auxRouter.HandleFunc("/videogames", ModificarRegistro).Methods(http.MethodPut)       //Modificar
+	auxRouter.HandleFunc("/videogames/{id}", BorrarRegistro).Methods(http.MethodDelete)  //Modificar
 
 	//===================================================================================================
 	// Setup and start server
 
-	port := ":8000"
-
 	server := &http.Server{
 		Handler: auxRouter,
-		Addr:    port,
+		Addr:    Port,
 		// timeouts so the server never waits forever...
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Printf("Server started at %s", port)
+	log.Printf("Server started at %s", Port)
 	log.Fatal(server.ListenAndServe())
 }
