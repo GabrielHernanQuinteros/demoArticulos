@@ -1,5 +1,5 @@
-github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819011742-3021a4a5ab8b h1:jI9BRCQkQ1znZ3Jdqr3XeZQ1KWCNKU/9ZGsEHI6KINY=
-github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819011742-3021a4a5ab8b/go.mod h1:BLDUe7yt+0aRv415t1ltg+A6pThyMB4RH6OntDtuuek=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819142807-8fdd43728828 h1:esZGxwVEPCr4EvOlrNfxWr5eLYcbQrGO9S0QFnkj7eU=
+github.com/GabrielHernanQuinteros/prueba v0.0.0-20230819142807-8fdd43728828/go.mod h1:nuP5/0vYKy4ZjhxcJIf2KOxMxPOt2jF3nqjYxoUQhuM=
 github.com/go-sql-driver/mysql v1.7.1 h1:lUIinVbN1DY0xBg0eMOzmmtGoHwWBbvnWubQUrtU8EI=
 github.com/go-sql-driver/mysql v1.7.1/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=

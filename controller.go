@@ -1,8 +1,12 @@
 package main
 
+import (
+	mytools "github.com/GabrielHernanQuinteros/prueba/video"
+)
+
 func CrearVideogameSQL(videoGame VideoGame) error {
 
-	bd, err := ConectarDB()
+	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 		return err
@@ -16,7 +20,7 @@ func CrearVideogameSQL(videoGame VideoGame) error {
 
 func BorrarVideogameSQL(id int64) error {
 
-	bd, err := ConectarDB()
+	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 		return err
@@ -30,7 +34,7 @@ func BorrarVideogameSQL(id int64) error {
 // It takes the ID to make the update
 func ModificarVideogameSQL(videoGame VideoGame) error {
 
-	bd, err := ConectarDB()
+	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 		return err
@@ -45,7 +49,7 @@ func TraerVideogamesSQL() ([]VideoGame, error) {
 	//Declare an array because if there's error, we return it empty
 	videoGames := []VideoGame{}
 
-	bd, err := ConectarDB()
+	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 		return videoGames, err
@@ -80,7 +84,7 @@ func TraerVideogamePorIdSQL(id int64) (VideoGame, error) {
 
 	var videoGame VideoGame
 
-	bd, err := ConectarDB()
+	bd, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 		return videoGame, err
