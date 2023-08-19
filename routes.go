@@ -4,101 +4,101 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/GabrielHernanQuinteros/demoArticulos/other"
 	"github.com/gorilla/mux"
 )
-
 
 //===================================================================================================
 // Funciones de ROUTERS
 
-func fnTraerVideogames(parWriter http.ResponseWriter, parRequest *http.Request) {
+func TraerVideogames(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	auxRegistros, err := fnTraerVideogamesSQL()
+	auxRegistros, err := TraerVideogamesSQL()
 
 	if err == nil {
-		fnRespondWithSuccess(auxRegistros, parWriter)
+		RespondWithSuccess(auxRegistros, parWriter)
 	} else {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 	}
 
 }
 
-func fnTraerVideogamePorId(parWriter http.ResponseWriter, parRequest *http.Request) {
+func TraerVideogamePorId(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	auxIdString := mux.Vars(parRequest)["id"]
-	auxId, err := fnStringToInt64(auxIdString)
+	auxId, err := other.StringToInt64(auxIdString)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 		return
 	}
 
-	auxRegistro, err := fnTraerVideogamePorIdSQL(auxId)
+	auxRegistro, err := TraerVideogamePorIdSQL(auxId)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 	} else {
-		fnRespondWithSuccess(auxRegistro, parWriter)
+		RespondWithSuccess(auxRegistro, parWriter)
 	}
 
 }
 
-func fnCrearVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func CrearVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	var auxRegistro VideoGame
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 	} else {
-		err := fnCrearVideogameSQL(auxRegistro)
+		err := CrearVideogameSQL(auxRegistro)
 
 		if err != nil {
-			fnRespondWithError(err, parWriter)
+			RespondWithError(err, parWriter)
 		} else {
-			fnRespondWithSuccess(true, parWriter)
+			RespondWithSuccess(true, parWriter)
 		}
 
 	}
 
 }
 
-func fnModificarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func ModificarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	var auxRegistro VideoGame
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 	} else {
-		err := fnModificarVideogameSQL(auxRegistro)
+		err := ModificarVideogameSQL(auxRegistro)
 
 		if err != nil {
-			fnRespondWithError(err, parWriter)
+			RespondWithError(err, parWriter)
 		} else {
-			fnRespondWithSuccess(true, parWriter)
+			RespondWithSuccess(true, parWriter)
 		}
 
 	}
 
 }
 
-func fnBorrarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
+func BorrarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 	auxIdString := mux.Vars(parRequest)["id"]
-	auxId, err := fnStringToInt64(auxIdString)
+	auxId, err := other.StringToInt64(auxIdString)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 		return
 	}
 
-	err = fnBorrarVideogameSQL(auxId)
+	err = BorrarVideogameSQL(auxId)
 
 	if err != nil {
-		fnRespondWithError(err, parWriter)
+		RespondWithError(err, parWriter)
 	} else {
-		fnRespondWithSuccess(true, parWriter)
+		RespondWithSuccess(true, parWriter)
 	}
 
 }
@@ -106,17 +106,17 @@ func fnBorrarVideogame(parWriter http.ResponseWriter, parRequest *http.Request) 
 //===================================================================================================
 // Funciones de CORS
 
-func fnEnableCORS(parRouter *mux.Router) {
+func EnableCORS(parRouter *mux.Router) {
 
 	parRouter.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", AllowedCORSDomain)
 	}).Methods(http.MethodOptions)
 
-	parRouter.Use(fnMiddlewareCors)
+	parRouter.Use(MiddlewareCors)
 
 }
 
-func fnMiddlewareCors(next http.Handler) http.Handler {
+func MiddlewareCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, req *http.Request) {
 			// Just put some headers to allow CORS...
@@ -133,14 +133,14 @@ func fnMiddlewareCors(next http.Handler) http.Handler {
 //===================================================================================================
 // Funciones de respuesta
 
-func fnRespondWithError(parError error, parWriter http.ResponseWriter) {
+func RespondWithError(parError error, parWriter http.ResponseWriter) {
 
 	parWriter.WriteHeader(http.StatusInternalServerError)
 	json.NewEncoder(parWriter).Encode(parError.Error())
 
 }
 
-func fnRespondWithSuccess(parDato interface{}, parWriter http.ResponseWriter) {
+func RespondWithSuccess(parDato interface{}, parWriter http.ResponseWriter) {
 
 	parWriter.WriteHeader(http.StatusOK)
 	json.NewEncoder(parWriter).Encode(parDato)

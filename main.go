@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/GabrielHernanQuinteros/prueba/video"
 	"github.com/gorilla/mux"
 )
 
@@ -17,8 +18,10 @@ type VideoGame struct {
 
 func main() {
 
+	video.Hola()
+
 	// Ping database
-	auxBaseDatos, err := fnConectarDB()
+	auxBaseDatos, err := video.ConectarDB(ConnectionString)
 
 	if err != nil {
 
@@ -42,13 +45,13 @@ func main() {
 
 	//setupRoutesForVideoGames(router)
 
-	fnEnableCORS(auxRouter)
+	EnableCORS(auxRouter)
 
-	auxRouter.HandleFunc("/videogames", fnTraerVideogames).Methods(http.MethodGet)
-	auxRouter.HandleFunc("/videogames/{id}", fnTraerVideogamePorId).Methods(http.MethodGet)
-	auxRouter.HandleFunc("/videogames", fnCrearVideogame).Methods(http.MethodPost)
-	auxRouter.HandleFunc("/videogames", fnModificarVideogame).Methods(http.MethodPut)
-	auxRouter.HandleFunc("/videogames/{id}", fnBorrarVideogame).Methods(http.MethodDelete)
+	auxRouter.HandleFunc("/videogames", TraerVideogames).Methods(http.MethodGet)
+	auxRouter.HandleFunc("/videogames/{id}", TraerVideogamePorId).Methods(http.MethodGet)
+	auxRouter.HandleFunc("/videogames", CrearVideogame).Methods(http.MethodPost)
+	auxRouter.HandleFunc("/videogames", ModificarVideogame).Methods(http.MethodPut)
+	auxRouter.HandleFunc("/videogames/{id}", BorrarVideogame).Methods(http.MethodDelete)
 
 	//===================================================================================================
 	// Setup and start server

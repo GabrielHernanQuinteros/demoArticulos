@@ -1,8 +1,8 @@
-package main
+package other
 
 import "strconv"
 
-func fnStringToInt64(parCadena string) (int64, error) {
+func StringToInt64(parCadena string) (int64, error) {
 
 	auxNumero, err := strconv.ParseInt(parCadena, 0, 64)
 

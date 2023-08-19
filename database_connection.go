@@ -6,6 +6,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func fnConectarDB() (*sql.DB, error) {
+func ConectarDB() (*sql.DB, error) {
 	return sql.Open("mysql", ConnectionString)
 }

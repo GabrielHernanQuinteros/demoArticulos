@@ -1,8 +1,8 @@
 package main
 
-func fnCrearVideogameSQL(videoGame VideoGame) error {
+func CrearVideogameSQL(videoGame VideoGame) error {
 
-	bd, err := fnConectarDB()
+	bd, err := ConectarDB()
 
 	if err != nil {
 		return err
@@ -14,9 +14,9 @@ func fnCrearVideogameSQL(videoGame VideoGame) error {
 
 }
 
-func fnBorrarVideogameSQL(id int64) error {
+func BorrarVideogameSQL(id int64) error {
 
-	bd, err := fnConectarDB()
+	bd, err := ConectarDB()
 
 	if err != nil {
 		return err
@@ -28,9 +28,9 @@ func fnBorrarVideogameSQL(id int64) error {
 }
 
 // It takes the ID to make the update
-func fnModificarVideogameSQL(videoGame VideoGame) error {
+func ModificarVideogameSQL(videoGame VideoGame) error {
 
-	bd, err := fnConectarDB()
+	bd, err := ConectarDB()
 
 	if err != nil {
 		return err
@@ -40,11 +40,12 @@ func fnModificarVideogameSQL(videoGame VideoGame) error {
 
 	return err
 }
-func fnTraerVideogamesSQL() ([]VideoGame, error) {
+func TraerVideogamesSQL() ([]VideoGame, error) {
 
 	//Declare an array because if there's error, we return it empty
 	videoGames := []VideoGame{}
-	bd, err := fnConectarDB()
+
+	bd, err := ConectarDB()
 
 	if err != nil {
 		return videoGames, err
@@ -62,9 +63,11 @@ func fnTraerVideogamesSQL() ([]VideoGame, error) {
 		// In each step, scan one row
 		var videoGame VideoGame
 		err = rows.Scan(&videoGame.Id, &videoGame.Name, &videoGame.Genre, &videoGame.Year)
+
 		if err != nil {
 			return videoGames, err
 		}
+
 		// and append it to the array
 		videoGames = append(videoGames, videoGame)
 	}
@@ -73,10 +76,11 @@ func fnTraerVideogamesSQL() ([]VideoGame, error) {
 
 }
 
-func fnTraerVideogamePorIdSQL(id int64) (VideoGame, error) {
+func TraerVideogamePorIdSQL(id int64) (VideoGame, error) {
 
 	var videoGame VideoGame
-	bd, err := fnConectarDB()
+
+	bd, err := ConectarDB()
 
 	if err != nil {
 		return videoGame, err
