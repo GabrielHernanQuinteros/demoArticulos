@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 	"github.com/gorilla/mux"
 )
@@ -13,7 +14,7 @@ func main() {
 
 	mytools.Hola()
 
-	auxBaseDatos, err := mytools.ConectarDB(ConnectionString) // Ping database
+	auxBaseDatos, err := mytools.ConectarDB(myvars.ConnectionString) // Ping database
 
 	if err != nil {
 
@@ -48,12 +49,12 @@ func main() {
 
 	server := &http.Server{
 		Handler: auxRouter,
-		Addr:    Port,
+		Addr:    myvars.Port,
 		// timeouts so the server never waits forever...
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Printf("Server started at %s", Port)
+	log.Printf("Server started at %s", myvars.Port)
 	log.Fatal(server.ListenAndServe())
 }

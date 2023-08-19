@@ -1,12 +1,13 @@
-package main
+package controller
 
 import (
+	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 )
 
-func CrearRegistroSQL(registro EstrucReg) error {
+func CrearRegistroSQL(registro myvars.EstrucReg) error {
 
-	bd, err := mytools.ConectarDB(ConnectionString)
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 		return err
@@ -20,7 +21,7 @@ func CrearRegistroSQL(registro EstrucReg) error {
 
 func BorrarRegistroSQL(id int64) error {
 
-	bd, err := mytools.ConectarDB(ConnectionString)
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 		return err
@@ -31,9 +32,9 @@ func BorrarRegistroSQL(id int64) error {
 	return err
 }
 
-func ModificarRegistroSQL(registro EstrucReg) error {
+func ModificarRegistroSQL(registro myvars.EstrucReg) error {
 
-	bd, err := mytools.ConectarDB(ConnectionString)
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 		return err
@@ -44,12 +45,12 @@ func ModificarRegistroSQL(registro EstrucReg) error {
 	return err
 }
 
-func TraerRegistrosSQL() ([]EstrucReg, error) {
+func TraerRegistrosSQL() ([]myvars.EstrucReg, error) {
 
 	//Declare an array because if there's error, we return it empty
-	arrRegistros := []EstrucReg{}
+	arrRegistros := []myvars.EstrucReg{}
 
-	bd, err := mytools.ConectarDB(ConnectionString)
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 		return arrRegistros, err
@@ -65,7 +66,7 @@ func TraerRegistrosSQL() ([]EstrucReg, error) {
 	// Iterate rows...
 	for rows.Next() {
 		// In each step, scan one row
-		var registro EstrucReg
+		var registro myvars.EstrucReg
 
 		err = rows.Scan(&registro.Id, &registro.Name, &registro.Genre, &registro.Year) //Modificar
 
@@ -81,11 +82,11 @@ func TraerRegistrosSQL() ([]EstrucReg, error) {
 
 }
 
-func TraerRegistroPorIdSQL(id int64) (EstrucReg, error) {
+func TraerRegistroPorIdSQL(id int64) (myvars.EstrucReg, error) {
 
-	var registro EstrucReg
+	var registro myvars.EstrucReg
 
-	bd, err := mytools.ConectarDB(ConnectionString)
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 		return registro, err

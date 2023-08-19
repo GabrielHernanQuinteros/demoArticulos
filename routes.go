@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
+	myvars "github.com/GabrielHernanQuinteros/demoArticulos/controler"
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 	"github.com/gorilla/mux"
 )
@@ -45,7 +47,7 @@ func TraerRegistroPorId(parWriter http.ResponseWriter, parRequest *http.Request)
 
 func CrearRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	var auxRegistro EstrucReg
+	var auxRegistro myvars.EstrucReg
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
@@ -65,7 +67,7 @@ func CrearRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
 func ModificarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	var auxRegistro EstrucReg
+	var auxRegistro myvars.EstrucReg
 	err := json.NewDecoder(parRequest.Body).Decode(&auxRegistro)
 
 	if err != nil {
