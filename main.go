@@ -6,8 +6,6 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/GabrielHernanQuinteros/demoArticulos/video"
-	
 )
 
 type VideoGame struct {
