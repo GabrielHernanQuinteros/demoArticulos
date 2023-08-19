@@ -1,0 +1,43 @@
+# docker run -d \
+# --rm \
+# --name mysqlc \
+# -p 3306:3306 \
+# -e MYSQL_ROOT_PASSWORD=root \
+# -v mysql_data:/var/lib/mysql \
+# mysql
+
+# docker run -d \
+# --rm \
+# --name phpmyadminc \
+# --link mysqlc \
+# -e PMA_HOST=mysqlc \
+# -p 8080:80 \
+# phpmyadmin
+
+
+version: '2'
+
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=prueba
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
