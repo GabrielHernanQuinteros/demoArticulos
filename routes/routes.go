@@ -1,11 +1,11 @@
-package main
+package routes
 
 import (
 	"encoding/json"
 	"net/http"
 
+	myctrllr "github.com/GabrielHernanQuinteros/demoArticulos/controller"
 	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
-	myvars "github.com/GabrielHernanQuinteros/demoArticulos/controler"
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 	"github.com/gorilla/mux"
 )
@@ -15,7 +15,7 @@ import (
 
 func TraerRegistros(parWriter http.ResponseWriter, parRequest *http.Request) {
 
-	auxRegistros, err := TraerRegistrosSQL()
+	auxRegistros, err := myctrllr.TraerRegistrosSQL()
 
 	if err == nil {
 		mytools.RespondWithSuccess(auxRegistros, parWriter)
@@ -35,7 +35,7 @@ func TraerRegistroPorId(parWriter http.ResponseWriter, parRequest *http.Request)
 		return
 	}
 
-	auxRegistro, err := TraerRegistroPorIdSQL(auxId)
+	auxRegistro, err := myctrllr.TraerRegistroPorIdSQL(auxId)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
@@ -53,7 +53,7 @@ func CrearRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 	} else {
-		err := CrearRegistroSQL(auxRegistro)
+		err := myctrllr.CrearRegistroSQL(auxRegistro)
 
 		if err != nil {
 			mytools.RespondWithError(err, parWriter)
@@ -73,7 +73,7 @@ func ModificarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)
 	} else {
-		err := ModificarRegistroSQL(auxRegistro)
+		err := myctrllr.ModificarRegistroSQL(auxRegistro)
 
 		if err != nil {
 			mytools.RespondWithError(err, parWriter)
@@ -95,7 +95,7 @@ func BorrarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 		return
 	}
 
-	err = BorrarRegistroSQL(auxId)
+	err = myctrllr.BorrarRegistroSQL(auxId)
 
 	if err != nil {
 		mytools.RespondWithError(err, parWriter)

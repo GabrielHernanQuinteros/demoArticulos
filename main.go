@@ -7,6 +7,7 @@ import (
 
 	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
 	mytools "github.com/GabrielHernanQuinteros/prueba/video"
+	myroute "github.com/GabrielHernanQuinteros/prueba/routes"
 	"github.com/gorilla/mux"
 )
 
