@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/GabrielHernanQuinteros/prueba/video"
+	mytools "github.com/GabrielHernanQuinteros/prueba/video"
 	"github.com/gorilla/mux"
 )
 
@@ -18,10 +18,11 @@ type VideoGame struct {
 
 func main() {
 
-	video.Hola()
+	mytools.Hola()
 
 	// Ping database
-	auxBaseDatos, err := video.ConectarDB(ConnectionString)
+	//auxBaseDatos, err := ConectarDB()
+	auxBaseDatos, err := mytools.ConectarDB(ConnectionString)
 
 	if err != nil {
 
@@ -45,7 +46,7 @@ func main() {
 
 	//setupRoutesForVideoGames(router)
 
-	EnableCORS(auxRouter)
+	mytools.EnableCORS(auxRouter)
 
 	auxRouter.HandleFunc("/videogames", TraerVideogames).Methods(http.MethodGet)
 	auxRouter.HandleFunc("/videogames/{id}", TraerVideogamePorId).Methods(http.MethodGet)
