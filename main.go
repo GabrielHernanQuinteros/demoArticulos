@@ -13,7 +13,8 @@ import (
 
 func main() {
 
-	auxBaseDatos, err := mytools.ConectarDB(myvars.ConnectionString) // Ping database
+	//Se conecta a la BD para hacer un ping y probar la existencia y conectividad
+	auxBaseDatos, err := mytools.ConectarDB(myvars.ConnectionString)
 
 	if err != nil {
 
@@ -31,25 +32,24 @@ func main() {
 	}
 
 	//===================================================================================================
-	// Define routes
+	// Definicion de las rutas
 
 	auxRouter := mux.NewRouter()
 
 	mytools.EnableCORS(auxRouter)
 
-	auxRouter.HandleFunc("/videogames", myroute.TraerRegistros).Methods(http.MethodGet)          //Modificar
-	auxRouter.HandleFunc("/videogames/{id}", myroute.TraerRegistroPorId).Methods(http.MethodGet) //Modificar
-	auxRouter.HandleFunc("/videogames", myroute.CrearRegistro).Methods(http.MethodPost)          //Modificar
-	auxRouter.HandleFunc("/videogames", myroute.ModificarRegistro).Methods(http.MethodPut)       //Modificar
-	auxRouter.HandleFunc("/videogames/{id}", myroute.BorrarRegistro).Methods(http.MethodDelete)  //Modificar
+	auxRouter.HandleFunc("/"+myvars.NombreRuta, myroute.TraerRegistros).Methods(http.MethodGet)
+	auxRouter.HandleFunc("/"+myvars.NombreRuta+"/{id}", myroute.TraerRegistroPorId).Methods(http.MethodGet)
+	auxRouter.HandleFunc("/"+myvars.NombreRuta, myroute.CrearRegistro).Methods(http.MethodPost)
+	auxRouter.HandleFunc("/"+myvars.NombreRuta, myroute.ModificarRegistro).Methods(http.MethodPut)
+	auxRouter.HandleFunc("/"+myvars.NombreRuta+"/{id}", myroute.BorrarRegistro).Methods(http.MethodDelete)
 
 	//===================================================================================================
-	// Setup and start server
+	// Setear y levantar el servidor
 
 	server := &http.Server{
-		Handler: auxRouter,
-		Addr:    myvars.Port,
-		// timeouts so the server never waits forever...
+		Handler:      auxRouter,
+		Addr:         myvars.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}

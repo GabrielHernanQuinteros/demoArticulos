@@ -8,10 +8,10 @@ import (
 )
 
 type EstrucReg struct {
-	Id    int64  `json:"id"`
-	Name  string `json:"name"`
-	Genre string `json:"genre"`
-	Year  int64  `json:"year"`
+	Id     int64  `json:"id"`
+	Codigo string `json:"codigo"`
+	Nombre string `json:"nombre"`
+	Stock  int64  `json:"stock"`
 }
 
 var _ = godotenv.Load(".env") // Cargar del archivo llamado ".env"
@@ -27,3 +27,5 @@ var (
 const AllowedCORSDomain = "http://localhost"
 
 const Port = ":8000"
+
+const NombreRuta = "articulos"

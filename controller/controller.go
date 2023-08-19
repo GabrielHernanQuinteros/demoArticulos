@@ -13,7 +13,7 @@ func CrearRegistroSQL(registro myvars.EstrucReg) error {
 		return err
 	}
 
-	_, err = bd.Exec("INSERT INTO video_games (name, genre, year) VALUES (?, ?, ?)", registro.Name, registro.Genre, registro.Year) //Modificar
+	_, err = bd.Exec("INSERT INTO articulos (codigo, nombre, stock) VALUES (?, ?, ?)", registro.Codigo, registro.Nombre, registro.Stock) //Modificar
 
 	return err
 
@@ -27,7 +27,7 @@ func BorrarRegistroSQL(id int64) error {
 		return err
 	}
 
-	_, err = bd.Exec("DELETE FROM video_games WHERE id = ?", id) //Modificar
+	_, err = bd.Exec("DELETE FROM articulos WHERE id = ?", id) //Modificar
 
 	return err
 }
@@ -40,7 +40,7 @@ func ModificarRegistroSQL(registro myvars.EstrucReg) error {
 		return err
 	}
 
-	_, err = bd.Exec("UPDATE video_games SET name = ?, genre = ?, year = ? WHERE id = ?", registro.Name, registro.Genre, registro.Year, registro.Id) //Modificar
+	_, err = bd.Exec("UPDATE articulos SET codigo = ?, nombre = ?, stock = ? WHERE id = ?", registro.Codigo, registro.Nombre, registro.Stock, registro.Id) //Modificar
 
 	return err
 }
@@ -57,7 +57,7 @@ func TraerRegistrosSQL() ([]myvars.EstrucReg, error) {
 	}
 
 	// Get rows so we can iterate them
-	rows, err := bd.Query("SELECT id, name, genre, year FROM video_games") //Modificar
+	rows, err := bd.Query("SELECT * FROM articulos") //Modificar
 
 	if err != nil {
 		return arrRegistros, err
@@ -68,7 +68,7 @@ func TraerRegistrosSQL() ([]myvars.EstrucReg, error) {
 		// In each step, scan one row
 		var registro myvars.EstrucReg
 
-		err = rows.Scan(&registro.Id, &registro.Name, &registro.Genre, &registro.Year) //Modificar
+		err = rows.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock) //Modificar
 
 		if err != nil {
 			return arrRegistros, err
@@ -92,9 +92,9 @@ func TraerRegistroPorIdSQL(id int64) (myvars.EstrucReg, error) {
 		return registro, err
 	}
 
-	row := bd.QueryRow("SELECT id, name, genre, year FROM video_games WHERE id = ?", id) //Modificar
+	row := bd.QueryRow("SELECT * FROM articulos WHERE id = ?", id) //Modificar
 
-	err = row.Scan(&registro.Id, &registro.Name, &registro.Genre, &registro.Year) //Modificar
+	err = row.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock) //Modificar
 
 	if err != nil {
 		return registro, err
