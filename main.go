@@ -5,15 +5,13 @@ import (
 	"net/http"
 	"time"
 
+	myroute "github.com/GabrielHernanQuinteros/demoArticulos/routes"
 	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
-	mytools "github.com/GabrielHernanQuinteros/prueba/video"
-	myroute "github.com/GabrielHernanQuinteros/prueba/routes"
+	mytools "github.com/GabrielHernanQuinteros/demoCommon"
 	"github.com/gorilla/mux"
 )
 
 func main() {
-
-	mytools.Hola()
 
 	auxBaseDatos, err := mytools.ConectarDB(myvars.ConnectionString) // Ping database
 
@@ -39,11 +37,11 @@ func main() {
 
 	mytools.EnableCORS(auxRouter)
 
-	auxRouter.HandleFunc("/videogames", TraerRegistros).Methods(http.MethodGet)          //Modificar
-	auxRouter.HandleFunc("/videogames/{id}", TraerRegistroPorId).Methods(http.MethodGet) //Modificar
-	auxRouter.HandleFunc("/videogames", CrearRegistro).Methods(http.MethodPost)          //Modificar
-	auxRouter.HandleFunc("/videogames", ModificarRegistro).Methods(http.MethodPut)       //Modificar
-	auxRouter.HandleFunc("/videogames/{id}", BorrarRegistro).Methods(http.MethodDelete)  //Modificar
+	auxRouter.HandleFunc("/videogames", myroute.TraerRegistros).Methods(http.MethodGet)          //Modificar
+	auxRouter.HandleFunc("/videogames/{id}", myroute.TraerRegistroPorId).Methods(http.MethodGet) //Modificar
+	auxRouter.HandleFunc("/videogames", myroute.CrearRegistro).Methods(http.MethodPost)          //Modificar
+	auxRouter.HandleFunc("/videogames", myroute.ModificarRegistro).Methods(http.MethodPut)       //Modificar
+	auxRouter.HandleFunc("/videogames/{id}", myroute.BorrarRegistro).Methods(http.MethodDelete)  //Modificar
 
 	//===================================================================================================
 	// Setup and start server

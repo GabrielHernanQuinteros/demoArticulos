@@ -6,7 +6,7 @@ import (
 
 	myctrllr "github.com/GabrielHernanQuinteros/demoArticulos/controller"
 	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
-	mytools "github.com/GabrielHernanQuinteros/prueba/video"
+	mytools "github.com/GabrielHernanQuinteros/demoCommon"
 	"github.com/gorilla/mux"
 )
 

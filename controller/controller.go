@@ -2,7 +2,7 @@ package controller
 
 import (
 	myvars "github.com/GabrielHernanQuinteros/demoArticulos/vars"
-	mytools "github.com/GabrielHernanQuinteros/prueba/video"
+	mytools "github.com/GabrielHernanQuinteros/demoCommon"
 )
 
 func CrearRegistroSQL(registro myvars.EstrucReg) error {
