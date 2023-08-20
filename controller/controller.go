@@ -13,7 +13,7 @@ func CrearRegistroSQL(registro myvars.EstrucReg) error {
 		return err
 	}
 
-	_, err = bd.Exec("INSERT INTO articulos (codigo, nombre, stock) VALUES (?, ?, ?)", registro.Codigo, registro.Nombre, registro.Stock) //Modificar
+	_, err = bd.Exec("INSERT INTO articulos (codigo, nombre, precio, stock) VALUES (?, ?, ?, ?)", registro.Codigo, registro.Nombre, registro.Precio, registro.Stock) //Modificar
 
 	return err
 
@@ -40,7 +40,7 @@ func ModificarRegistroSQL(registro myvars.EstrucReg) error {
 		return err
 	}
 
-	_, err = bd.Exec("UPDATE articulos SET codigo = ?, nombre = ?, stock = ? WHERE id = ?", registro.Codigo, registro.Nombre, registro.Stock, registro.Id) //Modificar
+	_, err = bd.Exec("UPDATE articulos SET codigo = ?, nombre = ?, precio = ?, stock = ? WHERE id = ?", registro.Codigo, registro.Nombre, registro.Precio, registro.Stock, registro.Id) //Modificar
 
 	return err
 }
@@ -68,7 +68,7 @@ func TraerRegistrosSQL() ([]myvars.EstrucReg, error) {
 		// In each step, scan one row
 		var registro myvars.EstrucReg
 
-		err = rows.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock) //Modificar
+		err = rows.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock, &registro.Precio) //Modificar
 
 		if err != nil {
 			return arrRegistros, err
@@ -94,7 +94,7 @@ func TraerRegistroPorIdSQL(id int64) (myvars.EstrucReg, error) {
 
 	row := bd.QueryRow("SELECT * FROM articulos WHERE id = ?", id) //Modificar
 
-	err = row.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock) //Modificar
+	err = row.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock, &registro.Precio) //Modificar
 
 	if err != nil {
 		return registro, err
