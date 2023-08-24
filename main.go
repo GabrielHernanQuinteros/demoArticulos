@@ -43,6 +43,7 @@ func main() {
 	auxRouter.HandleFunc("/"+myvars.NombreRuta, myroute.CrearRegistro).Methods(http.MethodPost)
 	auxRouter.HandleFunc("/"+myvars.NombreRuta, myroute.ModificarRegistro).Methods(http.MethodPut)
 	auxRouter.HandleFunc("/"+myvars.NombreRuta+"/{id}", myroute.BorrarRegistro).Methods(http.MethodDelete)
+	auxRouter.HandleFunc("/"+myvars.NombreRuta+"PorNombre/{nombre}", myroute.TraerRegistroPorNombre).Methods(http.MethodGet)
 
 	//===================================================================================================
 	// Setear y levantar el servidor

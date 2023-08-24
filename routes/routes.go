@@ -104,3 +104,17 @@ func BorrarRegistro(parWriter http.ResponseWriter, parRequest *http.Request) {
 	}
 
 }
+
+func TraerRegistroPorNombre(parWriter http.ResponseWriter, parRequest *http.Request) {
+
+	auxNombre := mux.Vars(parRequest)["nombre"]
+
+	auxRegistro, err := myctrllr.TraerRegistroPorNombreSQL(auxNombre)
+
+	if err != nil {
+		mytools.RespondWithError(err, parWriter)
+	} else {
+		mytools.RespondWithSuccess(auxRegistro, parWriter)
+	}
+
+}

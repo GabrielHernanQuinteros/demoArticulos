@@ -104,3 +104,26 @@ func TraerRegistroPorIdSQL(id int64) (myvars.EstrucReg, error) {
 	return registro, nil
 
 }
+
+func TraerRegistroPorNombreSQL(parNombre string) (myvars.EstrucReg, error) {
+
+	var registro myvars.EstrucReg
+
+	bd, err := mytools.ConectarDB(myvars.ConnectionString)
+
+	if err != nil {
+		return registro, err
+	}
+
+	row := bd.QueryRow("SELECT * FROM articulos WHERE nombre = ?", parNombre) //Modificar
+
+	err = row.Scan(&registro.Id, &registro.Codigo, &registro.Nombre, &registro.Stock, &registro.Precio) //Modificar
+
+	if err != nil {
+		return registro, err
+	}
+
+	// Success!
+	return registro, nil
+
+}
