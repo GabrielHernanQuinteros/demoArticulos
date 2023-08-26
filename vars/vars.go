@@ -27,6 +27,6 @@ var (
 
 const AllowedCORSDomain = "http://localhost"
 
-const Port = ":8000" //Modificar
+var Port = ":" + os.Getenv("puerto_propio") //Modificar
 
 const NombreRuta = "articulos" //Modificar
